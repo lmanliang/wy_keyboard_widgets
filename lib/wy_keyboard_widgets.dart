@@ -1,17 +1,24 @@
 library wy_keyboard_widgets;
+
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 //import 'package:flutter/services.dart';
 
 /// A Calculator.
-class DigitalKeyboard extends StatelessWidget {
-  const DigitalKeyboard(this.barcodeInput, this.height, this.width, this.margin, {Key? key, this.child}) : super(key: key);
+class WyDigitalKeyboard extends StatelessWidget {
+  const WyDigitalKeyboard(this.barcodeInput, this.height, this.width, this.margin,
+      {
+        Key? key,
+        this.delString = 'Del',
+        this.cleanString = 'Clean'
+      }) : super(key: key);
 
   final TextEditingController barcodeInput;
   final double height;
   final double width;
   final double margin;
-  final List<Widget>? child;
+  final String delString;
+  final String cleanString;
 
   @override
   Widget build(BuildContext context) {
@@ -188,11 +195,11 @@ class DigitalKeyboard extends StatelessWidget {
                       width: _width,
                       margin: _margin,
                       child: ElevatedButton(
-                        child: const AutoSizeText(
-                          '清除',
+                        child: AutoSizeText(
+                          cleanString,
                           maxFontSize: 72,
                           minFontSize: 12,
-                          style: TextStyle(fontSize: 72),
+                          style: const TextStyle(fontSize: 72),
                         ),
                         onPressed: () {
                           barcodeInput.text = '';
@@ -221,11 +228,11 @@ class DigitalKeyboard extends StatelessWidget {
                       width: _width,
                       margin: _margin,
                       child: ElevatedButton(
-                        child: const AutoSizeText(
-                          '刪除',
+                        child: AutoSizeText(
+                          delString,
                           maxFontSize: 72,
                           minFontSize: 12,
-                          style: TextStyle(fontSize: 72),
+                          style: const TextStyle(fontSize: 72),
                         ),
                         onPressed: () {
                           barcodeInput.text = barcodeInput.text.substring(0, barcodeInput.text.length - 1);
